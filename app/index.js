@@ -7,7 +7,7 @@
       <View style={styles.container}>
       <View style={styles.main}>
         <Text>
-        <App/>  {/* Render the App component here */}
+        <App/>  
         </Text>
       </View>
     </View>
