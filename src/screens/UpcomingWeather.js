@@ -94,6 +94,7 @@
 
 //React native docs about Flatlists
 //https://reactnative.dev/docs/flatlist?language=javascript
+//https://snack.expo.dev/?platform=web
 
 import React from "react";
 import {
@@ -103,8 +104,9 @@ import {
   StyleSheet,
   Text,
   StatusBar,
+  ImageBackground,
 } from "react-native";
-import Feather from "@expo/vector-icons/Feather";
+import ListItem from "../components/ListItem";
 
 const DATA = [
   {
@@ -145,29 +147,26 @@ const DATA = [
   },
 ];
 
-const Item = ({ dt_txt, temp_max, temp_min }) => (
-  <View style={styles.item}>
-    <Feather  name={"sun"} size={50}color={"white"}/>
-    <Text style={styles.title}>{dt_txt}</Text>
-    <Text style={styles.title}>{temp_max}</Text>
-    <Text style={styles.title}>{temp_min}</Text>
-  </View>
-);
-
 const UpcomingWeather = () => {
+  const { container, image } = styles;
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={DATA}
-        renderItem={({ item }) => (
-          <Item
-            dt_txt={item.dt_txt}
-            temp_max={item.main.temp_max}
-            temp_min={item.main.temp_min}
-          />
-        )}
-        keyExtractor={(item) => item.id}
-      />
+    <SafeAreaView style={container}>
+      <ImageBackground
+        source={require("../../assets/cloudy.jpg")}
+        style={image}
+      >
+        <FlatList
+          data={DATA}
+          renderItem={({ item }) => (
+            <ListItem
+              dt_txt={item.dt_txt}
+              temp_max={item.main.temp_max}
+              temp_min={item.main.temp_min}
+            />
+          )}
+          keyExtractor={(item) => item.dt_txt}
+        />
+      </ImageBackground>
     </SafeAreaView>
   );
 };
@@ -176,15 +175,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
+    backgroundColor: "#a0a0a0",
   },
-  item: {
-    backgroundColor: "#f9c2ff",
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
-  title: {
-    fontSize: 32,
+  image: {
+    // width: "100%",
+    //height: "300%",
+    height: 1100,
+    width: 410,
   },
 });
 
